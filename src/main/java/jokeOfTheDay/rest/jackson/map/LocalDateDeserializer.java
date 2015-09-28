@@ -11,7 +11,6 @@ import java.io.IOException;
 /**
  * Converts JSON date string into LocalDate.
  *
- * @author Jordan Silva
  */
 public class LocalDateDeserializer extends JsonDeserializer<LocalDate> {
 

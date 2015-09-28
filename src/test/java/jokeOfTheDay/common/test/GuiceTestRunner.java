@@ -9,7 +9,6 @@ import static jokeOfTheDay.guice.GuiceInjector.getInjector;
 /**
  * JUnit test runner that initialize Guice.
  *
- * @author jordan
  */
 public class GuiceTestRunner extends BlockJUnit4ClassRunner {
 

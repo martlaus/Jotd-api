@@ -10,14 +10,6 @@ import org.joda.time.format.DateTimeFormatter;
 
 import java.io.IOException;
 
-/**
- * Converts LocalDate into JSON date string. As LocalDate does not have
- * information about time zone and time, time is set to midday and time zone is
- * assumed to be UTC. It may cause problems if server and client are in
- * different time zones.
- *
- * @author Jordan Silva
- */
 public class LocalDateSerializer extends JsonSerializer<LocalDate> {
 
     private static DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd'T12:00:00.000Z'");
