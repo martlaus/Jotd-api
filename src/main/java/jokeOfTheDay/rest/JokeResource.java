@@ -22,7 +22,7 @@ public class JokeResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Joke> getAllLicenseTypes() {
+    public List<Joke> getAllJokes() {
         return jokeService.getAllJokes();
     }
 
