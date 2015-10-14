@@ -31,4 +31,9 @@ public class JokeDAO {
 
         return merged;
     }
+
+    public void remove(Joke joke) {
+        entityManager.remove(joke);
+    }
+
 }
