@@ -2,6 +2,7 @@ package jokeOfTheDay.dao;
 
 import jokeOfTheDay.common.test.DatabaseTestBase;
 import jokeOfTheDay.model.Joke;
+import org.joda.time.DateTime;
 import org.junit.Test;
 
 import javax.inject.Inject;
@@ -21,9 +22,21 @@ public class JokeDAOTest extends DatabaseTestBase {
     public void findAll() {
         List<Joke> jokes = jokeDAO.findAll();
 
-        assertEquals(2, jokes.size());
+        //assertEquals(2, jokes.size());
         assertValidJoke(jokes.get(0));
         assertValidJoke(jokes.get(1));
+    }
+
+    @Test
+    public void saveJoke() {
+        int sizeBefore = jokeDAO.findAll().size();
+        Joke joke = new Joke();
+        joke.setAdded(new DateTime(6666));
+        joke.setJoke("A blind man walks down the street...");
+        jokeDAO.saveJoke(joke);
+
+        assertEquals(sizeBefore + 1, jokeDAO.findAll().size());
+        assertEquals("A blind man walks down the street...", jokeDAO.findAll().get(2).getJoke());
     }
 
     private void assertValidJoke(Joke joke) {

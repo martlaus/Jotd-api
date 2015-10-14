@@ -17,4 +17,8 @@ public class JokeService {
     public List<Joke> getAllJokes() {
         return jokeDAO.findAll();
     }
+
+    public Joke saveJoke(Joke joke) {
+        return jokeDAO.saveJoke(joke);
+    }
 }

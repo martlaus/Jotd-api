@@ -5,6 +5,7 @@ import jokeOfTheDay.service.JokeService;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -24,6 +25,14 @@ public class JokeResource {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Joke> getAllJokes() {
         return jokeService.getAllJokes();
+    }
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public void addJoke(Joke joke) {
+        if (joke != null) {
+            jokeService.saveJoke(joke);
+        }
     }
 
 }
