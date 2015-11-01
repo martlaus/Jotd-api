@@ -26,7 +26,7 @@ public class JokeDAO {
             merged = entityManager.merge(joke);
             entityManager.persist(merged);
         } catch (PersistenceException e) {
-            throw new RuntimeException("Duplicate token found when persisting authenticatedUser.");
+            throw new RuntimeException("Exception when persisting joke.");
         }
 
         return merged;

@@ -25,6 +25,7 @@ public class JokeResourceTest extends ResourceIntegrationTestBase {
         List<Joke> jokes = response.readEntity(new GenericType<List<Joke>>() {
         });
 
+        //assertEquals(2, jokes.size());
         assertValidJoke(jokes.get(0));
         assertValidJoke(jokes.get(1));
 
