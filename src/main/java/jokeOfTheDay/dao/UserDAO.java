@@ -49,4 +49,7 @@ public class UserDAO {
         return user;
     }
 
+    public void delete(User user) {
+        entityManager.remove(user);
+    }
 }

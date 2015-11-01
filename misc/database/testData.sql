@@ -10,3 +10,5 @@ INSERT INTO Joke (id, joke, added) VALUES (6, 'Q: How many prolog programmers do
 -- Add Users
 INSERT INTO User (id, email, password, created) VALUES (1, 'admin@admin.kz', 'kaarliema', NOW());
 INSERT INTO User (id, email, password, created) VALUES (2, 'user@user.kz', 'siimuema', NOW());
+
+INSERT INTO AuthenticatedUser (id, user_id, token) VALUES (1, 1, 'superUniqueToken');
