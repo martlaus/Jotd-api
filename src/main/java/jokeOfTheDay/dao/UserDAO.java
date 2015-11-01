@@ -4,7 +4,9 @@ import jokeOfTheDay.model.User;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
@@ -31,6 +33,20 @@ public class UserDAO {
         }
 
         return merged;
+    }
+
+    public User getUserByEmail(String email) {
+        TypedQuery<User> findByCode = entityManager
+                .createQuery("SELECT u FROM User u WHERE u.email = :email", User.class);
+
+        User user = null;
+        try {
+            user = findByCode.setParameter("email", email).getSingleResult();
+        } catch (NoResultException ex) {
+            // ignore
+        }
+
+        return user;
     }
 
 }

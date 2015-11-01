@@ -21,9 +21,17 @@ public class UserDAOTest extends DatabaseTestBase {
     public void findAll() {
         List<User> users = userDAO.findAll();
 
-        //assertEquals(2, jokes.size());
         assertValidUser(users.get(0));
         assertValidUser(users.get(1));
+    }
+
+    @Test
+    public void getUserByEmail(){
+        User user = userDAO.getUserByEmail("admin@admin.kz");
+
+        assertNotNull(user.getId());
+        assertEquals("admin@admin.kz", user.getEmail());
+        assertNotNull(user.getPassword());
     }
 
     @Test

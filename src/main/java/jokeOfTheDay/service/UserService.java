@@ -2,6 +2,7 @@ package jokeOfTheDay.service;
 
 import jokeOfTheDay.dao.UserDAO;
 import jokeOfTheDay.model.User;
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -16,6 +17,10 @@ public class UserService {
 
     public User saveUser(User user) {
         //check if data is according to business rules
+
+        //secure pw
+        String hashed = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+        user.setPassword(hashed);
 
         return userDAO.saveUser(user);
     }
