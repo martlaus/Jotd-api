@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.persistence.EntityTransaction;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
@@ -30,8 +31,8 @@ public class GenericExceptionMapper implements ExceptionMapper<Throwable> {
             WebApplicationException webEx = (WebApplicationException) error;
             response = webEx.getResponse();
         } else {
-            response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Internal error")
-                    .type("text/plain").build();
+            response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Internal error : " + error.getMessage())
+                    .type(MediaType.APPLICATION_JSON).build();
         }
 
         return response;

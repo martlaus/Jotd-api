@@ -29,7 +29,6 @@ public class LoginResource {
                 return authenticatedUser;
             }
         }
-
-        return null;
+        throw new RuntimeException("Unable to log in - wrong user info or the user is not registered");
     }
 }
