@@ -3,6 +3,7 @@ package jokeOfTheDay.rest;
 import jokeOfTheDay.model.Joke;
 import jokeOfTheDay.service.JokeService;
 
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -28,6 +29,7 @@ public class JokeResource {
     }
 
     @POST
+    @RolesAllowed("USER")
     @Produces(MediaType.APPLICATION_JSON)
     public void addJoke(Joke joke) {
         if (joke != null) {
