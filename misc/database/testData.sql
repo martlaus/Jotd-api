@@ -8,7 +8,9 @@ INSERT INTO Joke (id, joke, added) VALUES (5, 'A SQL query goes into a bar, walk
 INSERT INTO Joke (id, joke, added) VALUES (6, 'Q: How many prolog programmers does it take to change a lightbulb? A: Yes.', NOW());
 
 -- Add Users
-INSERT INTO User (id, email, password, created) VALUES (1, 'admin@admin.kz', 'kaarliema', NOW());
-INSERT INTO User (id, email, password, created) VALUES (2, 'user@user.kz', 'siimuema', NOW());
+INSERT INTO User (id, email, password, role, created)
+VALUES (1, 'admin@admin.kz', '$2a$10$R.coZxN.slwkXJ2KxEsa4ufhqk8sGbWha/Me5OmXTYEQgL0XEi6OK', 'USER', NOW());
+INSERT INTO User (id, email, password, role, created)
+VALUES (2, 'user@user.kz', '$2a$10$R.coZxN.slwkXJ2KxEsa4ufhqk8sGbWha/Me5OmXTYEQgL0XEi6OK', 'USER', NOW());
 
 INSERT INTO AuthenticatedUser (id, user_id, token) VALUES (1, 1, 'superUniqueToken');

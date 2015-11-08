@@ -18,6 +18,7 @@ CREATE TABLE User (
   id       BIGINT    AUTO_INCREMENT PRIMARY KEY,
   email    VARCHAR(255) UNIQUE NOT NULL,
   password VARCHAR(255)        NOT NULL,
+  role VARCHAR(255) NOT NULL,
   created  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -29,4 +30,21 @@ CREATE TABLE AuthenticatedUser (
   FOREIGN KEY (user_id)
   REFERENCES User (id)
     ON DELETE RESTRICT
+);
+
+CREATE TABLE Vote (
+  id      BIGINT AUTO_INCREMENT PRIMARY KEY,
+  user_id BIGINT NOT NULL,
+  joke_id BIGINT NOT NULL,
+
+  FOREIGN KEY (user_id)
+  REFERENCES User (id)
+    ON DELETE RESTRICT,
+
+  FOREIGN KEY (joke_id)
+  REFERENCES Joke (id)
+    ON DELETE RESTRICT,
+
+  UNIQUE KEY (user_id, joke_id)
+
 );
