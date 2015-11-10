@@ -1,7 +1,6 @@
 package jokeOfTheDay.rest.filter;
 
 import jokeOfTheDay.model.AuthenticatedUser;
-import jokeOfTheDay.model.Role;
 import jokeOfTheDay.model.User;
 import org.easymock.EasyMockRunner;
 import org.easymock.TestSubject;
@@ -37,7 +36,7 @@ public class JotdPrincipalTest {
         AuthenticatedUser authenticatedUser = new AuthenticatedUser();
         User user = new User();
         user.setEmail("admin@admin.kz");
-        user.setRole(Role.USER);
+        user.setRole("USER");
         authenticatedUser.setUser(user);
 
         return authenticatedUser;

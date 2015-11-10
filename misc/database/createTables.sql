@@ -45,6 +45,8 @@ CREATE TABLE Vote (
   REFERENCES Joke (id)
     ON DELETE RESTRICT,
 
-  UNIQUE KEY (user_id, joke_id)
+  UNIQUE KEY (user_id, joke_id, id)
 
 );
+
+

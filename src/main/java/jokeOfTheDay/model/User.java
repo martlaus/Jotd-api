@@ -7,7 +7,10 @@ import jokeOfTheDay.rest.jackson.map.DateTimeSerializer;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  * Created by mart on 25.10.15.
@@ -30,8 +33,7 @@ public class User {
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime created;
 
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    private String role;
 
     public String getEmail() {
         return email;
@@ -67,11 +69,11 @@ public class User {
         this.id = id;
     }
 
-    public Role getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(String role) {
         this.role = role;
     }
 }
