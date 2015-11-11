@@ -32,7 +32,7 @@ public class SecurityFilter implements ContainerRequestFilter {
 
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
-        String token = request.getHeader("Authentication");
+        String token = request.getHeader("Token");
 
         if (token != null) {
             AuthenticatedUserService authenticatedUserService = newAuthenticatedUserService();

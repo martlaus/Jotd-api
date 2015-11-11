@@ -55,7 +55,7 @@ public class SecurityFilterTest {
 
     @Test
     public void filterNoTokenInRequest() throws IOException {
-        expect(request.getHeader("Authentication")).andReturn(null);
+        expect(request.getHeader("Token")).andReturn(null);
 
         replay(uriInfo, request, session, context);
         filter.filter(context);
@@ -67,7 +67,7 @@ public class SecurityFilterTest {
     public void filterNoUserWithRecievedToken() throws IOException {
         String token = "token";
 
-        expect(request.getHeader("Authentication")).andReturn(token);
+        expect(request.getHeader("Token")).andReturn(token);
         expect(authenticatedUserService.getAuthenticatedUserByToken(token)).andReturn(null);
         context.abortWith(EasyMock.capture(capturedResponse));
 
@@ -171,7 +171,7 @@ public class SecurityFilterTest {
     }
 
     private void setExpects(String token, AuthenticatedUser authenticatedUser, User user, String returnedUser) {
-        expect(request.getHeader("Authentication")).andReturn(token);
+        expect(request.getHeader("Token")).andReturn(token);
         expect(authenticatedUserService.getAuthenticatedUserByToken(token)).andReturn(authenticatedUser);
         expect(authenticatedUser.getUser()).andReturn(user);
         expect(request.getHeader("Email")).andReturn(returnedUser);

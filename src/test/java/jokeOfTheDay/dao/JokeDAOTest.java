@@ -28,6 +28,13 @@ public class JokeDAOTest extends DatabaseTestBase {
     }
 
     @Test
+    public void getById() {
+        Joke joke = jokeDAO.getJokeById(1L);
+
+        assertValidJoke(joke);
+    }
+
+    @Test
     public void saveJoke() {
         int sizeBefore = jokeDAO.findAll().size();
         Joke joke = new Joke();

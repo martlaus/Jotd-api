@@ -33,6 +33,7 @@ public class User {
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime created;
 
+    @Column
     private String role;
 
     public String getEmail() {

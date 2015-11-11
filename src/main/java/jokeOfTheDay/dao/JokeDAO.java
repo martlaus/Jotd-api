@@ -4,7 +4,9 @@ import jokeOfTheDay.model.Joke;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
@@ -30,6 +32,20 @@ public class JokeDAO {
         }
 
         return merged;
+    }
+
+    public Joke getJokeById(long id) {
+        TypedQuery<Joke> findByCode = entityManager
+                .createQuery("SELECT u FROM Joke u WHERE u.id = :id", Joke.class);
+
+        Joke joke = null;
+        try {
+            joke = findByCode.setParameter("id", id).getSingleResult();
+        } catch (NoResultException ex) {
+            // ignore
+        }
+
+        return joke;
     }
 
     public void remove(Joke joke) {

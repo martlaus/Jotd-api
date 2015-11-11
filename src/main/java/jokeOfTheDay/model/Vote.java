@@ -1,9 +1,8 @@
 package jokeOfTheDay.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 
 /**
  * Created by mart on 10.11.15.
@@ -18,8 +17,12 @@ public class Vote {
     @ManyToOne(optional = false)
     private Joke joke;
 
+    @JsonIgnore
     @ManyToOne(optional = false)
     private User user;
+
+    @Column
+    private boolean isUpvote;
 
     public Long getId() {
         return id;
@@ -43,5 +46,13 @@ public class Vote {
 
     public void setJoke(Joke joke) {
         this.joke = joke;
+    }
+
+    public boolean isUpvote() {
+        return isUpvote;
+    }
+
+    public void setIsUpvote(boolean isUpvote) {
+        this.isUpvote = isUpvote;
     }
 }

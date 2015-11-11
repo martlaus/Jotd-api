@@ -4,7 +4,7 @@ import jokeOfTheDay.common.test.ResourceIntegrationTestBase;
 import jokeOfTheDay.model.AuthenticatedUser;
 import jokeOfTheDay.model.Joke;
 import jokeOfTheDay.model.User;
-import org.joda.time.DateTime;
+import jokeOfTheDay.model.Vote;
 import org.junit.Test;
 
 import javax.ws.rs.client.ClientRequestContext;
@@ -18,27 +18,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
- * Created by mart on 28.09.15.
+ * Created by mart on 11.11.15.
  */
-public class JokeResourceTest extends ResourceIntegrationTestBase {
+public class VoteResourceTest extends ResourceIntegrationTestBase {
 
     @Test
-    public void getAllJokes() {
-        Response response = doGet("joke");
+    public void upvote() {
 
-        List<Joke> jokes = response.readEntity(new GenericType<List<Joke>>() {
-        });
-
-        assertValidJoke(jokes.get(0));
-        assertValidJoke(jokes.get(1));
-
-    }
-
-    @Test
-    public void addJoke() {
         User user = new User();
         user.setEmail("mart@mart.kz");
         user.setPassword("mart");
@@ -50,36 +40,16 @@ public class JokeResourceTest extends ResourceIntegrationTestBase {
         assertNotNull(authenticatedUser.getToken());
         String token = authenticatedUser.getToken();
 
-        Response jokes = doGet("joke");
+        Vote vote = new Vote();
+        Joke joke = new Joke();
+        joke.setId(1L);
+        vote.setJoke(joke);
 
-        int size = jokes.readEntity(new GenericType<List<Joke>>() {
-        }).size();
+        Response response2 = getTarget("vote/upvote", new LoggedInUserFilter(token)).request().accept(MediaType.APPLICATION_JSON_TYPE)
+                .post(Entity.entity(vote, MediaType.APPLICATION_JSON_TYPE));
 
-        Joke jokeBefore = new Joke();
-        jokeBefore.setAdded(new DateTime(6666));
-        jokeBefore.setJoke("A man in a wheelchair walks down the street...");
+        assertEquals(Response.Status.OK.getStatusCode(), response2.getStatus());
 
-        Response response2 = getTarget("joke", new LoggedInUserFilter(token)).request().accept(MediaType.APPLICATION_JSON_TYPE)
-                .post(Entity.entity(jokeBefore, MediaType.APPLICATION_JSON_TYPE));
-
-        jokes = doGet("joke");
-        List<Joke> jokes2 = jokes.readEntity(new GenericType<List<Joke>>() {
-        });
-
-        assertEquals(Response.Status.NO_CONTENT.getStatusCode(), response2.getStatus());
-        assertEquals(size + 1, jokes2.size());
-    }
-
-    private void assertValidJoke(Joke joke) {
-        assertNotNull(joke.getId());
-        assertNotNull(joke.getJoke());
-        if (joke.getId() == 1) {
-            assertEquals("yo moma so fat", joke.getJoke());
-        } else if (joke.getId() == 2) {
-            assertEquals("yo papa so fat", joke.getJoke());
-        } else {
-            fail("Joke with unexpected id.");
-        }
     }
 
     @Provider

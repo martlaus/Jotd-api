@@ -36,4 +36,5 @@ public class JokeResource {
             jokeService.saveJoke(joke);
         }
     }
+
 }

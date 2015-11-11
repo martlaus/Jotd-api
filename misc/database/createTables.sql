@@ -41,6 +41,7 @@ CREATE TABLE Vote (
   id      BIGINT AUTO_INCREMENT PRIMARY KEY,
   user_id BIGINT NOT NULL,
   joke_id BIGINT NOT NULL,
+  isUpvote BOOLEAN,
 
   FOREIGN KEY (user_id)
   REFERENCES User (id)
