@@ -27,7 +27,7 @@ public class UserService {
 
     public User saveUser(User user) {
         //check if data is according to business rules
-
+        user.setRole("USER");
         //secure pw
         String hashed = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
         user.setPassword(hashed);
