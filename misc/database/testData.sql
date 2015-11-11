@@ -1,3 +1,5 @@
+USE jotd;
+
 -- Add jokes
 
 INSERT INTO Joke (id, joke, added) VALUES (1, 'I know a guy who\'s addicted to brake fluid. He says he can stop any time.', NOW());
