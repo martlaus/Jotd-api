@@ -5,10 +5,7 @@ import jokeOfTheDay.service.JokeService;
 
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
@@ -37,4 +34,10 @@ public class JokeResource {
         }
     }
 
+    @GET
+    @Path("getById")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Joke getJokeById(@QueryParam("id") Long id) {
+        return jokeService.getJokeById(id);
+    }
 }

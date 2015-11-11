@@ -1,10 +1,14 @@
 package jokeOfTheDay.dao;
 
+import jokeOfTheDay.model.Joke;
+import jokeOfTheDay.model.User;
 import jokeOfTheDay.model.Vote;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
@@ -30,5 +34,47 @@ public class VoteDAO {
         }
 
         return merged;
+    }
+
+    public List<Vote> getVotesByJokeAndUser(Joke joke, User user) {
+        TypedQuery<Vote> findByCode = entityManager
+                .createQuery("SELECT u FROM Vote u WHERE u.joke = :jokeId and u.user = :userId", Vote.class);
+
+        List<Vote> votes = null;
+        try {
+            votes = findByCode.setParameter("jokeId", joke).setParameter("userId", user).getResultList();
+        } catch (NoResultException ex) {
+            // ignore
+        }
+
+        return votes;
+    }
+
+    public List<Vote> getUpVotesByJoke(Joke joke) {
+        TypedQuery<Vote> findByCode = entityManager
+                .createQuery("SELECT u FROM Vote u WHERE u.joke = :jokeId and u.isUpvote = true", Vote.class);
+
+        List<Vote> votes = null;
+        try {
+            votes = findByCode.setParameter("jokeId", joke).getResultList();
+        } catch (NoResultException ex) {
+            // ignore
+        }
+
+        return votes;
+    }
+
+    public List<Vote> getDownVotesByJoke(Joke joke) {
+        TypedQuery<Vote> findByCode = entityManager
+                .createQuery("SELECT u FROM Vote u WHERE u.joke = :jokeId and u.isUpvote = false", Vote.class);
+
+        List<Vote> votes = null;
+        try {
+            votes = findByCode.setParameter("jokeId", joke).getResultList();
+        } catch (NoResultException ex) {
+            // ignore
+        }
+
+        return votes;
     }
 }

@@ -38,6 +38,16 @@ public class JokeResourceTest extends ResourceIntegrationTestBase {
     }
 
     @Test
+    public void getJokeById() {
+        Response response = doGet("joke/getById?id=1");
+
+        Joke joke = response.readEntity(new GenericType<Joke>() {
+        });
+
+        assertValidJoke(joke);
+    }
+
+    @Test
     public void addJoke() {
         User user = new User();
         user.setEmail("mart@mart.kz");

@@ -7,8 +7,10 @@ import jokeOfTheDay.rest.jackson.map.DateTimeSerializer;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  * Created by mart on 28.09.15.
@@ -27,13 +29,11 @@ public class Joke {
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime added;
 
-    @Transient
-    private List<Vote> upvotes;
+    @Column
+    private long upvotes;
 
-    @Transient
-    private List<Vote> downvotes;
-
-
+    @Column
+    private long downvotes;
 
     public Long getId() {
         return id;
@@ -59,5 +59,21 @@ public class Joke {
     @JsonDeserialize(using = DateTimeDeserializer.class)
     public void setAdded(DateTime added) {
         this.added = added;
+    }
+
+    public long getDownvotes() {
+        return downvotes;
+    }
+
+    public void setDownvotes(long downvotes) {
+        this.downvotes = downvotes;
+    }
+
+    public long getUpvotes() {
+        return upvotes;
+    }
+
+    public void setUpvotes(long upvotes) {
+        this.upvotes = upvotes;
     }
 }

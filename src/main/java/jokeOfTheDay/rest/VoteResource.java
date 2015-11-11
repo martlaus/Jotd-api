@@ -1,10 +1,7 @@
 package jokeOfTheDay.rest;
 
-import jokeOfTheDay.dao.JokeDAO;
-import jokeOfTheDay.dao.VoteDAO;
-import jokeOfTheDay.model.Joke;
 import jokeOfTheDay.model.Vote;
-import jokeOfTheDay.rest.filter.JotdPrincipal;
+import jokeOfTheDay.service.VoteService;
 
 import javax.inject.Inject;
 import javax.ws.rs.POST;
@@ -22,10 +19,8 @@ import javax.ws.rs.core.SecurityContext;
 public class VoteResource {
 
     @Inject
-    private VoteDAO voteDAO;
+    private VoteService voteService;
 
-    @Inject
-    private JokeDAO jokeDAO;
     private SecurityContext securityContext;
 
     @Context
@@ -37,20 +32,13 @@ public class VoteResource {
     @Path("upvote")
     @Produces(MediaType.APPLICATION_JSON)
     public Response upVote(Vote vote) {
-        if (vote != null) {
-            vote.setId(null);
-            vote.setIsUpvote(true);
-
-            //set user
-            JotdPrincipal jotdPrincipal = (JotdPrincipal) securityContext.getUserPrincipal();
-            vote.setUser(jotdPrincipal.getUser());
-
-            //set joke
-            Joke joke = jokeDAO.getJokeById(vote.getJoke().getId());
-            vote.setJoke(joke);
-
-            voteDAO.saveVote(vote);
-            return Response.status(Response.Status.OK).build();
+        try {
+            if (vote != null) {
+                voteService.upVote(vote, securityContext);
+                return Response.status(Response.Status.OK).build();
+            }
+        } catch (Exception e) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
         }
 
         return Response.status(Response.Status.BAD_REQUEST).build();
@@ -60,20 +48,13 @@ public class VoteResource {
     @Path("downvote")
     @Produces(MediaType.APPLICATION_JSON)
     public Response downVote(Vote vote) {
-        if (vote != null) {
-            vote.setId(null);
-            vote.setIsUpvote(false);
-
-            //set user
-            JotdPrincipal jotdPrincipal = (JotdPrincipal) securityContext.getUserPrincipal();
-            vote.setUser(jotdPrincipal.getUser());
-
-            //set joke
-            Joke joke = jokeDAO.getJokeById(vote.getJoke().getId());
-            vote.setJoke(joke);
-
-            voteDAO.saveVote(vote);
-            return Response.status(Response.Status.OK).build();
+        try {
+            if (vote != null) {
+                voteService.downVote(vote, securityContext);
+                return Response.status(Response.Status.OK).build();
+            }
+        } catch (Exception e) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
         }
 
         return Response.status(Response.Status.BAD_REQUEST).build();

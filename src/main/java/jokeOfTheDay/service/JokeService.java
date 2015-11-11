@@ -21,4 +21,8 @@ public class JokeService {
     public Joke saveJoke(Joke joke) {
         return jokeDAO.saveJoke(joke);
     }
+
+    public Joke getJokeById(Long id) {
+        return jokeDAO.getJokeById(id);
+    }
 }
