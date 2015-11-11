@@ -2,9 +2,14 @@ USE jotd;
 
 -- Drop tables
 
-DROP TABLE IF EXISTS Joke;
-DROP TABLE IF EXISTS User;
-DROP TABLE IF EXISTS AuthenticatedUser;
+SET foreign_key_checks = 0;
+
+DROP TABLE Joke;
+DROP TABLE User;
+DROP TABLE AuthenticatedUser;
+DROP TABLE Vote;
+
+SET foreign_key_checks = 1;
 
 -- Create tables
 
