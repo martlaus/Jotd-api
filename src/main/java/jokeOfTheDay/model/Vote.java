@@ -14,11 +14,11 @@ public class Vote {
     @GeneratedValue
     private Long id;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Joke joke;
 
     @JsonIgnore
-    @ManyToOne(optional = false)
+    @ManyToOne
     private User user;
 
     @Column

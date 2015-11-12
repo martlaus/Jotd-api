@@ -59,7 +59,43 @@ public class VoteResourceTest extends ResourceIntegrationTestBase {
         Joke returnedJoke = response4.readEntity(new GenericType<Joke>() {
         });
 
-        assertEquals(originalJoke.getUpvotes() + 2, returnedJoke.getUpvotes());
+        assertEquals(originalJoke.getUpvotes() + 3, returnedJoke.getUpvotes());
+    }
+
+    @Test
+    public void downVote() {
+        User user = new User();
+        user.setEmail("mart@mart.kz");
+        user.setPassword("mart");
+
+        Response response = doPost("signin", Entity.entity(user, MediaType.APPLICATION_JSON_TYPE));
+        AuthenticatedUser authenticatedUser = response.readEntity(new GenericType<AuthenticatedUser>() {
+        });
+
+        Response response2 = doGet("joke/getById?id=1");
+
+        Joke originalJoke = response2.readEntity(new GenericType<Joke>() {
+        });
+
+        assertNotNull(authenticatedUser.getToken());
+        String token = authenticatedUser.getToken();
+
+        Vote vote = new Vote();
+        Joke joke = new Joke();
+        joke.setId(1L);
+        vote.setJoke(joke);
+
+        Response response3 = getTarget("vote/downvote", new LoggedInUserFilter(token)).request().accept(MediaType.APPLICATION_JSON_TYPE)
+                .post(Entity.entity(vote, MediaType.APPLICATION_JSON_TYPE));
+
+        assertEquals(Response.Status.OK.getStatusCode(), response3.getStatus());
+
+        Response response4 = doGet("joke/getById?id=1");
+
+        Joke returnedJoke = response4.readEntity(new GenericType<Joke>() {
+        });
+
+        assertEquals(originalJoke.getDownvotes() + 1, returnedJoke.getDownvotes());
     }
 
     @Provider

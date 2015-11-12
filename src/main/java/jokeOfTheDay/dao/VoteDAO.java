@@ -30,7 +30,7 @@ public class VoteDAO {
             merged = entityManager.merge(vote);
             entityManager.persist(merged);
         } catch (PersistenceException e) {
-            throw new RuntimeException("Exception when persisting joke.");
+            throw new RuntimeException("Exception when persisting vote.");
         }
 
         return merged;
