@@ -13,8 +13,11 @@ public class AuthenticatedUserService {
     @Inject
     private AuthenticatedUserDAO authenticatedUserDAO;
 
-
     public AuthenticatedUser getAuthenticatedUserByToken(String token) {
         return authenticatedUserDAO.findAuthenticatedUserByToken(token);
+    }
+
+    public void deleteAuthenticatedUser(AuthenticatedUser authenticatedUser) {
+        authenticatedUserDAO.delete(authenticatedUser);
     }
 }

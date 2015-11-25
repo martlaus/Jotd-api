@@ -1,10 +1,10 @@
 package jokeOfTheDay.rest.errorhandling;
 
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.EntityTransaction;
-import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
@@ -27,13 +27,17 @@ public class GenericExceptionMapper implements ExceptionMapper<Throwable> {
 
     private Response getResponse(Throwable error) {
         Response response;
-        if (error instanceof WebApplicationException) {
-            WebApplicationException webEx = (WebApplicationException) error;
-            response = webEx.getResponse();
-        } else {
-            response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Internal error : " + error.getMessage())
-                    .type(MediaType.APPLICATION_JSON).build();
+
+        String msg = " - reason unknown.";
+        if (error != null) {
+            msg = error.getMessage();
+
         }
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("Internal error", msg);
+        response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(jsonObject.toString())
+                .type(MediaType.APPLICATION_JSON).build();
 
         return response;
     }
