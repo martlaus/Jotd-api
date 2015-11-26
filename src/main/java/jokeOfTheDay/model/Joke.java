@@ -7,10 +7,7 @@ import jokeOfTheDay.rest.jackson.map.DateTimeSerializer;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by mart on 28.09.15.
@@ -28,6 +25,10 @@ public class Joke {
     @Column
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime added;
+
+    @ManyToOne
+    @JoinColumn(name = "user")
+    private User user;
 
     @Column
     private long upvotes;
@@ -75,5 +76,13 @@ public class Joke {
 
     public void setUpvotes(long upvotes) {
         this.upvotes = upvotes;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

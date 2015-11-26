@@ -14,9 +14,10 @@ SET foreign_key_checks = 1;
 -- Create tables
 
 CREATE TABLE Joke (
-  id    BIGINT    AUTO_INCREMENT PRIMARY KEY,
-  joke  TEXT NOT NULL,
+  id        BIGINT    AUTO_INCREMENT PRIMARY KEY,
+  joke      TEXT NOT NULL,
   added     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  user      BIGINT,
   upvotes   BIGINT    DEFAULT 0,
   downvotes BIGINT    DEFAULT 0
 );
@@ -40,14 +41,14 @@ CREATE TABLE AuthenticatedUser (
 );
 
 CREATE TABLE Vote (
-  id      BIGINT AUTO_INCREMENT PRIMARY KEY,
-  user_id BIGINT NOT NULL,
-  joke_id BIGINT NOT NULL,
+  id       BIGINT AUTO_INCREMENT PRIMARY KEY,
+  user_id  BIGINT NOT NULL,
+  joke_id  BIGINT NOT NULL,
   isUpvote BOOLEAN,
 
   FOREIGN KEY (user_id)
   REFERENCES User (id)
-    ON DELETE CASCADE ,
+    ON DELETE CASCADE,
 
   FOREIGN KEY (joke_id)
   REFERENCES Joke (id)

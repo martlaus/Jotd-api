@@ -4,6 +4,7 @@ import jokeOfTheDay.dao.AuthenticatedUserDAO;
 import jokeOfTheDay.dao.UserDAO;
 import jokeOfTheDay.model.AuthenticatedUser;
 import jokeOfTheDay.model.User;
+import org.joda.time.DateTime;
 import org.mindrot.jbcrypt.BCrypt;
 
 import javax.inject.Inject;
@@ -32,6 +33,7 @@ public class UserService {
         String hashed = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
         user.setPassword(hashed);
 
+        user.setCreated(DateTime.now());
         return userDAO.saveUser(user);
     }
 

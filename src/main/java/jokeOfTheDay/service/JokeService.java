@@ -2,8 +2,11 @@ package jokeOfTheDay.service;
 
 import jokeOfTheDay.dao.JokeDAO;
 import jokeOfTheDay.model.Joke;
+import jokeOfTheDay.model.User;
+import jokeOfTheDay.rest.filter.JotdPrincipal;
 
 import javax.inject.Inject;
+import javax.ws.rs.core.SecurityContext;
 import java.util.List;
 
 /**
@@ -18,7 +21,10 @@ public class JokeService {
         return jokeDAO.findAll();
     }
 
-    public Joke saveJoke(Joke joke) {
+    public Joke saveJoke(Joke joke, SecurityContext securityContext) {
+        User user = getUser(securityContext);
+        joke.setUser(user);
+
         return jokeDAO.saveJoke(joke);
     }
 
@@ -26,8 +32,17 @@ public class JokeService {
         return jokeDAO.getJokeById(id);
     }
 
-    public void delete(Long id) {
+    public void delete(Long id, SecurityContext securityContext) throws IllegalAccessException {
+        User user = getUser(securityContext);
         Joke joke = jokeDAO.getJokeById(id);
-        jokeDAO.remove(joke);
+
+        if(joke.getUser().equals(user)) {
+            jokeDAO.remove(joke);
+        } else throw new IllegalAccessException("Not your joke");
     }
+
+    private User getUser(SecurityContext securityContext) {
+        return ((JotdPrincipal) securityContext.getUserPrincipal()).getUser();
+    }
+
 }

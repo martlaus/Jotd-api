@@ -7,7 +7,7 @@ INSERT INTO Joke (id, joke, added) VALUES (2, 'A woman gets on a bus with her ba
 INSERT INTO Joke (id, joke, added) VALUES (3, 'Police arrested two kids yesterday, one was drinking battery acid, the other was eating fireworks. They charged one - and let the other one off.', NOW());
 INSERT INTO Joke (id, joke, added) VALUES (4, 'I''m on a whiskey diet. I''ve lost three days already. ', NOW());
 INSERT INTO Joke (id, joke, added) VALUES (5, 'A SQL query goes into a bar, walks up to two tables and asks, "Can I join you?"', NOW());
-INSERT INTO Joke (id, joke, added) VALUES (6, 'Q: How many prolog programmers does it take to change a lightbulb? A: Yes.', NOW());
+INSERT INTO Joke (id, joke, added, user) VALUES (6, 'Q: How many prolog programmers does it take to change a lightbulb? A: Yes.', NOW(), 1);
 
 -- Add Users
 INSERT INTO User (id, email, password, role, created)
