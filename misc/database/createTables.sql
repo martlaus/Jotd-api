@@ -19,7 +19,11 @@ CREATE TABLE Joke (
   added     TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   user      BIGINT,
   upvotes   BIGINT    DEFAULT 0,
-  downvotes BIGINT    DEFAULT 0
+  downvotes BIGINT    DEFAULT 0,
+
+  FOREIGN KEY (user)
+  REFERENCES User (id)
+    ON DELETE RESTRICT
 );
 
 CREATE TABLE User (
