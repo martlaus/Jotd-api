@@ -39,7 +39,7 @@ public class JokeResourceTest extends ResourceIntegrationTestBase {
 
     @Test
     public void getJokeById() {
-        Response response = doGet("joke/getById?id=1");
+        Response response = doGet("joke/1");
 
         Joke joke = response.readEntity(new GenericType<Joke>() {
         });

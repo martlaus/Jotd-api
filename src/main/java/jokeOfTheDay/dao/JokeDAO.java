@@ -1,6 +1,7 @@
 package jokeOfTheDay.dao;
 
 import jokeOfTheDay.model.Joke;
+import org.joda.time.DateTime;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -50,6 +51,19 @@ public class JokeDAO {
 
     public void remove(Joke joke) {
         entityManager.remove(joke);
+    }
+
+    public List<Joke> findAllJokesFrom(DateTime dateTime) {
+        TypedQuery<Joke> findByCode = entityManager
+                .createQuery("SELECT j FROM Joke j WHERE j.added >= :date", Joke.class);
+
+        List<Joke> jokes = null;
+        try {
+            jokes = findByCode.setParameter("date", dateTime).getResultList();
+        } catch (NoResultException ex) {
+            // ignore
+        }
+        return jokes;
     }
 
 }

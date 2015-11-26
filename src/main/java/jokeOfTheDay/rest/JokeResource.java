@@ -2,6 +2,8 @@ package jokeOfTheDay.rest;
 
 import jokeOfTheDay.model.Joke;
 import jokeOfTheDay.service.JokeService;
+import jokeOfTheDay.utils.DateUtils;
+import org.joda.time.DateTime;
 
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
@@ -28,8 +30,15 @@ public class JokeResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Joke> getAllJokes() {
-        return jokeService.getAllJokes();
+    public List<Joke> getAllJokes(@QueryParam("startingDate") String startingDate) throws Exception {
+        if(startingDate == null) {
+            return jokeService.getAllJokes();
+        } else {
+            DateTime dateTime = DateUtils.fromJson(startingDate);
+
+        }
+
+        throw new Exception("Something went wrong");
     }
 
     @POST
@@ -43,6 +52,7 @@ public class JokeResource {
 
     @GET
     @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
     public Joke getJokeById(@PathParam("id") Long id) {
         return jokeService.getJokeById(id);
     }

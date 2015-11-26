@@ -50,6 +50,15 @@ public class JokeDAOTest extends DatabaseTestBase {
 
     }
 
+    @Test
+    public void findAllJokesFrom() {
+        List<Joke> jokes = jokeDAO.findAllJokesFrom(new DateTime("1990-06-30T01:20"));
+
+        //assertEquals(2, jokes.size());
+        assertValidJoke(jokes.get(0));
+        assertValidJoke(jokes.get(1));
+    }
+
     private void assertValidJoke(Joke joke) {
         assertNotNull(joke.getId());
         assertNotNull(joke.getJoke());

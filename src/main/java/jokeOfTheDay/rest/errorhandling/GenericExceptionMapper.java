@@ -35,7 +35,7 @@ public class GenericExceptionMapper implements ExceptionMapper<Throwable> {
         }
 
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("Internal error", msg);
+        jsonObject.put("Message", msg);
         response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(jsonObject.toString())
                 .type(MediaType.APPLICATION_JSON).build();
 

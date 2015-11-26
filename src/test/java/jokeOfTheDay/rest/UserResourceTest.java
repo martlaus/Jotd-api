@@ -26,7 +26,7 @@ public class UserResourceTest extends ResourceIntegrationTestBase {
 
         Response response = doPost("user", Entity.entity(user, MediaType.APPLICATION_JSON_TYPE));
 
-        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+        assertEquals(Response.Status.NO_CONTENT.getStatusCode(), response.getStatus());
 
     }
 

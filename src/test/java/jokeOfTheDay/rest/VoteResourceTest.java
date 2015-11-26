@@ -18,8 +18,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 /**
  * Created by mart on 11.11.15.
@@ -36,7 +35,7 @@ public class VoteResourceTest extends ResourceIntegrationTestBase {
         AuthenticatedUser authenticatedUser = response.readEntity(new GenericType<AuthenticatedUser>() {
         });
 
-        Response response2 = doGet("joke/getById?id=1");
+        Response response2 = doGet("joke/1");
 
         Joke originalJoke = response2.readEntity(new GenericType<Joke>() {
         });
@@ -52,14 +51,14 @@ public class VoteResourceTest extends ResourceIntegrationTestBase {
         Response response3 = getTarget("vote/upvote", new LoggedInUserFilter(token)).request().accept(MediaType.APPLICATION_JSON_TYPE)
                 .post(Entity.entity(vote, MediaType.APPLICATION_JSON_TYPE));
 
-        assertEquals(Response.Status.OK.getStatusCode(), response3.getStatus());
+        assertEquals(Response.Status.NO_CONTENT.getStatusCode(), response3.getStatus());
 
-        Response response4 = doGet("joke/getById?id=1");
+        Response response4 = doGet("joke/1");
 
         Joke returnedJoke = response4.readEntity(new GenericType<Joke>() {
         });
 
-        assertEquals(originalJoke.getUpvotes() + 3, returnedJoke.getUpvotes());
+        assertTrue(originalJoke.getUpvotes() < returnedJoke.getUpvotes());
     }
 
     @Test
@@ -72,7 +71,7 @@ public class VoteResourceTest extends ResourceIntegrationTestBase {
         AuthenticatedUser authenticatedUser = response.readEntity(new GenericType<AuthenticatedUser>() {
         });
 
-        Response response2 = doGet("joke/getById?id=1");
+        Response response2 = doGet("joke/1");
 
         Joke originalJoke = response2.readEntity(new GenericType<Joke>() {
         });
@@ -88,9 +87,9 @@ public class VoteResourceTest extends ResourceIntegrationTestBase {
         Response response3 = getTarget("vote/downvote", new LoggedInUserFilter(token)).request().accept(MediaType.APPLICATION_JSON_TYPE)
                 .post(Entity.entity(vote, MediaType.APPLICATION_JSON_TYPE));
 
-        assertEquals(Response.Status.OK.getStatusCode(), response3.getStatus());
+        assertEquals(Response.Status.NO_CONTENT.getStatusCode(), response3.getStatus());
 
-        Response response4 = doGet("joke/getById?id=1");
+        Response response4 = doGet("joke/1");
 
         Joke returnedJoke = response4.readEntity(new GenericType<Joke>() {
         });
