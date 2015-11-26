@@ -31,7 +31,7 @@ public class JokeResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Joke> getAllJokes(@QueryParam("startingDate") String startingDate) throws Exception {
-        if(startingDate == null) {
+        if (startingDate == null) {
             return jokeService.getAllJokes();
         } else {
             DateTime dateTime = DateUtils.fromJson(startingDate);
@@ -44,10 +44,12 @@ public class JokeResource {
     @POST
     @RolesAllowed("USER")
     @Produces(MediaType.APPLICATION_JSON)
-    public void addJoke(Joke joke) {
+    public Joke addJoke(Joke joke) throws Exception {
         if (joke != null) {
-            jokeService.saveJoke(joke, securityContext);
+            return jokeService.saveJoke(joke, securityContext);
         }
+
+        throw new Exception("unable to persist joke.");
     }
 
     @GET
