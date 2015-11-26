@@ -37,7 +37,7 @@ public class VoteServiceTest {
     private SecurityContext securityContext;
 
     @Test
-    public void upVote() {
+    public void upVote() throws Exception {
         Joke joke = new Joke();
         Vote vote = new Vote();
         User user = new User();
@@ -63,7 +63,7 @@ public class VoteServiceTest {
     }
 
     @Test
-    public void downVote() {
+    public void downVote() throws Exception {
         Joke joke = new Joke();
         Vote vote = new Vote();
         User user = new User();

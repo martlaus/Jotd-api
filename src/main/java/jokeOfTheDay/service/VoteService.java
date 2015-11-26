@@ -21,7 +21,7 @@ public class VoteService {
     @Inject
     private JokeDAO jokeDAO;
 
-    public void upVote(Vote vote, SecurityContext securityContext) {
+    public void upVote(Vote vote, SecurityContext securityContext) throws Exception {
         vote.setId(null);
         vote.setIsUpvote(true);
 
@@ -32,7 +32,7 @@ public class VoteService {
         //check if duplicate
         List<Vote> votes = voteDAO.getVotesByJokeAndUser(vote.getJoke(), jotdPrincipal.getUser());
         if(votes.size() > 0 && votes.get(0).isUpvote()) {
-            throw new RuntimeException("Duplicate upvote");
+            throw new Exception("Duplicate upvote");
         } else if (votes.size() > 0 && !votes.get(0).isUpvote()) {
             //delete downvote when adding upvote
             voteDAO.remove(votes.get(0));
@@ -52,7 +52,7 @@ public class VoteService {
         jokeDAO.saveJoke(joke);
     }
 
-    public void downVote(Vote vote, SecurityContext securityContext) {
+    public void downVote(Vote vote, SecurityContext securityContext) throws Exception {
         vote.setId(null);
         vote.setIsUpvote(false);
 
@@ -62,8 +62,8 @@ public class VoteService {
 
         //check if duplicate
         List<Vote> votes = voteDAO.getVotesByJokeAndUser(vote.getJoke(), jotdPrincipal.getUser());
-        if(votes.size() > 0 && !votes.get(0).isUpvote()) {
-            throw new RuntimeException("Duplicate upvote");
+        if(votes.size() > 0 && votes.get(0).isUpvote()) {
+            throw new Exception("Duplicate down vote");
         } else if (votes.size() > 0 && !votes.get(0).isUpvote()) {
             //delete upvote when downvoteing
             voteDAO.remove(votes.get(0));
