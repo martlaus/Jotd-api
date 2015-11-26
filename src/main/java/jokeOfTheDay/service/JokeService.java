@@ -25,4 +25,9 @@ public class JokeService {
     public Joke getJokeById(Long id) {
         return jokeDAO.getJokeById(id);
     }
+
+    public void delete(Long id) {
+        Joke joke = jokeDAO.getJokeById(id);
+        jokeDAO.remove(joke);
+    }
 }

@@ -77,4 +77,9 @@ public class VoteDAO {
 
         return votes;
     }
+
+    public void remove(Vote vote) {
+        entityManager.remove(vote);
+    }
+
 }

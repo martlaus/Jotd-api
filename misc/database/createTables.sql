@@ -47,11 +47,11 @@ CREATE TABLE Vote (
 
   FOREIGN KEY (user_id)
   REFERENCES User (id)
-    ON DELETE RESTRICT,
+    ON DELETE CASCADE ,
 
   FOREIGN KEY (joke_id)
   REFERENCES Joke (id)
-    ON DELETE RESTRICT,
+    ON DELETE CASCADE,
 
   UNIQUE KEY (user_id, joke_id, id)
 

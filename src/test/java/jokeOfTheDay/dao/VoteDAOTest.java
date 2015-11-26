@@ -61,4 +61,15 @@ public class VoteDAOTest extends DatabaseTestBase {
 
         // assertEquals(initialSize + 1, userDAO.findAll().size());
     }
+
+    @Test
+    public void getVotesByJokeAndUser() {
+        Joke joke = new Joke();
+        User user = new User();
+        joke.setId(1L);
+        user.setId(1L);
+
+        List<Vote> votes = voteDAO.getVotesByJokeAndUser(joke, user);
+        assertNotNull(votes);
+    }
 }

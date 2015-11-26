@@ -35,9 +35,14 @@ public class JokeResource {
     }
 
     @GET
-    @Path("getById")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Joke getJokeById(@QueryParam("id") Long id) {
+    @Path("{id}")
+    public Joke getJokeById(@PathParam("id") Long id) {
         return jokeService.getJokeById(id);
+    }
+
+    @DELETE
+    @Path("{id}")
+    public void deleteJoke(@PathParam("id") Long id) {
+        jokeService.delete(id);
     }
 }

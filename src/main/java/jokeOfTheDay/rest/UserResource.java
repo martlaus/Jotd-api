@@ -9,7 +9,6 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import java.util.List;
 
 /**
@@ -23,20 +22,17 @@ public class UserResource {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response addUser(User user) {
+    public void addUser(User user) throws Exception {
         if (user != null) {
             userService.saveUser(user);
-
-            return Response.status(Response.Status.OK).build();
+        } else {
+            throw new Exception("No user");
         }
-
-        return Response.status(Response.Status.BAD_REQUEST).build();
-    }
+   }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
-
 }

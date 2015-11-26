@@ -3,13 +3,13 @@ package jokeOfTheDay.rest;
 import jokeOfTheDay.model.Vote;
 import jokeOfTheDay.service.VoteService;
 
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
 /**
@@ -29,35 +29,27 @@ public class VoteResource {
     }
 
     @POST
+    @RolesAllowed("USER")
     @Path("upvote")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response upVote(Vote vote) {
-        try {
-            if (vote != null) {
-                voteService.upVote(vote, securityContext);
-                return Response.status(Response.Status.OK).build();
-            }
-        } catch (Exception e) {
-            return Response.status(Response.Status.BAD_REQUEST).build();
+    public void upVote(Vote vote) throws Exception {
+        if (vote != null) {
+            voteService.upVote(vote, securityContext);
+        } else {
+            throw new Exception("No vote.");
         }
-
-        return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
     @POST
+    @RolesAllowed("USER")
     @Path("downvote")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response downVote(Vote vote) {
-        try {
-            if (vote != null) {
-                voteService.downVote(vote, securityContext);
-                return Response.status(Response.Status.OK).build();
-            }
-        } catch (Exception e) {
-            return Response.status(Response.Status.BAD_REQUEST).build();
+    public void downVote(Vote vote) throws Exception {
+        if (vote != null) {
+            voteService.downVote(vote, securityContext);
+        } else {
+            throw new Exception("No vote.");
         }
 
-        return Response.status(Response.Status.BAD_REQUEST).build();
     }
-
 }

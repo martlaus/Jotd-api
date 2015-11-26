@@ -25,11 +25,18 @@ public class VoteService {
         vote.setId(null);
         vote.setIsUpvote(true);
 
-        //check if duplicate
-
         //set user
         JotdPrincipal jotdPrincipal = (JotdPrincipal) securityContext.getUserPrincipal();
         vote.setUser(jotdPrincipal.getUser());
+
+        //check if duplicate
+        List<Vote> votes = voteDAO.getVotesByJokeAndUser(vote.getJoke(), jotdPrincipal.getUser());
+        if(votes.size() > 0 && votes.get(0).isUpvote()) {
+            throw new RuntimeException("Duplicate upvote");
+        } else if (votes.size() > 0 && !votes.get(0).isUpvote()) {
+            //delete downvote when adding upvote
+            voteDAO.remove(votes.get(0));
+        }
 
         //set joke
         Joke joke = jokeDAO.getJokeById(vote.getJoke().getId());
@@ -49,11 +56,18 @@ public class VoteService {
         vote.setId(null);
         vote.setIsUpvote(false);
 
-        //check if duplicate
-
         //set user
         JotdPrincipal jotdPrincipal = (JotdPrincipal) securityContext.getUserPrincipal();
         vote.setUser(jotdPrincipal.getUser());
+
+        //check if duplicate
+        List<Vote> votes = voteDAO.getVotesByJokeAndUser(vote.getJoke(), jotdPrincipal.getUser());
+        if(votes.size() > 0 && !votes.get(0).isUpvote()) {
+            throw new RuntimeException("Duplicate upvote");
+        } else if (votes.size() > 0 && !votes.get(0).isUpvote()) {
+            //delete upvote when downvoteing
+            voteDAO.remove(votes.get(0));
+        }
 
         //set joke
         Joke joke = jokeDAO.getJokeById(vote.getJoke().getId());
