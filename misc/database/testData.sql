@@ -1,5 +1,11 @@
 USE jotd;
 
+-- Add Users
+INSERT INTO User (id, email, password, role, created)
+VALUES (1, 'admin@admin.kz', '$2a$10$R.coZxN.slwkXJ2KxEsa4ufhqk8sGbWha/Me5OmXTYEQgL0XEi6OK', 'USER', NOW());
+INSERT INTO User (id, email, password, role, created)
+VALUES (2, 'user@user.kz', '$2a$10$R.coZxN.slwkXJ2KxEsa4ufhqk8sGbWha/Me5OmXTYEQgL0XEi6OK', 'USER', NOW());
+
 -- Add jokes
 
 INSERT INTO Joke (id, joke, added) VALUES (1, 'I know a guy who\'s addicted to brake fluid. He says he can stop any time.', NOW());
@@ -9,10 +15,5 @@ INSERT INTO Joke (id, joke, added) VALUES (4, 'I''m on a whiskey diet. I''ve los
 INSERT INTO Joke (id, joke, added) VALUES (5, 'A SQL query goes into a bar, walks up to two tables and asks, "Can I join you?"', NOW());
 INSERT INTO Joke (id, joke, added, user) VALUES (6, 'Q: How many prolog programmers does it take to change a lightbulb? A: Yes.', NOW(), 1);
 
--- Add Users
-INSERT INTO User (id, email, password, role, created)
-VALUES (1, 'admin@admin.kz', '$2a$10$R.coZxN.slwkXJ2KxEsa4ufhqk8sGbWha/Me5OmXTYEQgL0XEi6OK', 'USER', NOW());
-INSERT INTO User (id, email, password, role, created)
-VALUES (2, 'user@user.kz', '$2a$10$R.coZxN.slwkXJ2KxEsa4ufhqk8sGbWha/Me5OmXTYEQgL0XEi6OK', 'USER', NOW());
 
 INSERT INTO AuthenticatedUser (id, user_id, token) VALUES (1, 1, 'superUniqueToken');

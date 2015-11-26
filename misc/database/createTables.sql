@@ -4,14 +4,22 @@ USE jotd;
 
 SET foreign_key_checks = 0;
 
-DROP TABLE IF EXISTS Joke;
 DROP TABLE IF EXISTS User;
+DROP TABLE IF EXISTS Joke;
 DROP TABLE IF EXISTS AuthenticatedUser;
 DROP TABLE IF EXISTS Vote;
 
 SET foreign_key_checks = 1;
 
 -- Create tables
+
+CREATE TABLE User (
+  id       BIGINT    AUTO_INCREMENT PRIMARY KEY,
+  email    VARCHAR(255) UNIQUE NOT NULL,
+  password VARCHAR(255)        NOT NULL,
+  role     VARCHAR(255)        NOT NULL,
+  created  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
 CREATE TABLE Joke (
   id        BIGINT    AUTO_INCREMENT PRIMARY KEY,
@@ -26,13 +34,6 @@ CREATE TABLE Joke (
     ON DELETE RESTRICT
 );
 
-CREATE TABLE User (
-  id       BIGINT    AUTO_INCREMENT PRIMARY KEY,
-  email    VARCHAR(255) UNIQUE NOT NULL,
-  password VARCHAR(255)        NOT NULL,
-  role     VARCHAR(255)        NOT NULL,
-  created  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
 
 CREATE TABLE AuthenticatedUser (
   id      BIGINT AUTO_INCREMENT PRIMARY KEY,
