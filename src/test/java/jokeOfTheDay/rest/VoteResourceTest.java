@@ -71,7 +71,7 @@ public class VoteResourceTest extends ResourceIntegrationTestBase {
         AuthenticatedUser authenticatedUser = response.readEntity(new GenericType<AuthenticatedUser>() {
         });
 
-        Response response2 = doGet("joke/1");
+        Response response2 = doGet("joke/2");
 
         Joke originalJoke = response2.readEntity(new GenericType<Joke>() {
         });
@@ -81,7 +81,7 @@ public class VoteResourceTest extends ResourceIntegrationTestBase {
 
         Vote vote = new Vote();
         Joke joke = new Joke();
-        joke.setId(1L);
+        joke.setId(2L);
         vote.setJoke(joke);
 
         Response response3 = getTarget("vote/downvote", new LoggedInUserFilter(token)).request().accept(MediaType.APPLICATION_JSON_TYPE)
@@ -89,7 +89,7 @@ public class VoteResourceTest extends ResourceIntegrationTestBase {
 
         assertEquals(Response.Status.NO_CONTENT.getStatusCode(), response3.getStatus());
 
-        Response response4 = doGet("joke/1");
+        Response response4 = doGet("joke/2");
 
         Joke returnedJoke = response4.readEntity(new GenericType<Joke>() {
         });

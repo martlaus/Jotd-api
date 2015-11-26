@@ -48,7 +48,7 @@ public class JokeResourceTest extends ResourceIntegrationTestBase {
     }
 
     @Test
-    public void addJoke() {
+    public void addJokeAndDelete() {
         User user = new User();
         user.setEmail("mart@mart.kz");
         user.setPassword("mart");
@@ -72,12 +72,26 @@ public class JokeResourceTest extends ResourceIntegrationTestBase {
         Response response2 = getTarget("joke", new LoggedInUserFilter(token)).request().accept(MediaType.APPLICATION_JSON_TYPE)
                 .post(Entity.entity(jokeBefore, MediaType.APPLICATION_JSON_TYPE));
 
+        Joke returnedJoke = response2.readEntity(new GenericType<Joke>() {
+        });
         jokes = doGet("joke");
         List<Joke> jokes2 = jokes.readEntity(new GenericType<List<Joke>>() {
         });
 
-        assertEquals(Response.Status.NO_CONTENT.getStatusCode(), response2.getStatus());
+        assertEquals(200, response2.getStatus());
         assertEquals(size + 1, jokes2.size());
+
+        Response response3 = getTarget("joke/" + returnedJoke.getId(), new LoggedInUserFilter(token)).request().accept(MediaType.APPLICATION_JSON_TYPE)
+                .delete();
+
+        assertEquals(Response.Status.NO_CONTENT.getStatusCode(), response3.getStatus());
+
+        jokes = doGet("joke");
+        List<Joke> jokes3 = jokes.readEntity(new GenericType<List<Joke>>() {
+        });
+
+        assertEquals(size, jokes3.size());
+
     }
 
     private void assertValidJoke(Joke joke) {
