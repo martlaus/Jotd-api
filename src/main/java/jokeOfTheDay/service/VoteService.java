@@ -62,9 +62,9 @@ public class VoteService {
 
         //check if duplicate
         List<Vote> votes = voteDAO.getVotesByJokeAndUser(vote.getJoke(), jotdPrincipal.getUser());
-        if(votes.size() > 0 && votes.get(0).isUpvote()) {
-            throw new Exception("Duplicate down vote");
-        } else if (votes.size() > 0 && !votes.get(0).isUpvote()) {
+        if(votes.size() > 0 && !votes.get(0).isUpvote()) {
+            throw new Exception("Duplicate downvote");
+        } else if (votes.size() > 0 && votes.get(0).isUpvote()) {
             //delete upvote when downvoteing
             voteDAO.remove(votes.get(0));
         }
