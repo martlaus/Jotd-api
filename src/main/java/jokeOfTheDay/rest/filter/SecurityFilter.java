@@ -9,6 +9,7 @@ import javax.ws.rs.Priorities;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.ext.Provider;
@@ -42,7 +43,8 @@ public class SecurityFilter implements ContainerRequestFilter {
                 JotdSecurityContext securityContext = new JotdSecurityContext(principal, uriInfo);
                 requestContext.setSecurityContext(securityContext);
             } else {
-                requestContext.abortWith(Response.status(HTTP_AUTHENTICATION_TIMEOUT).build());
+                Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Denied")
+                        .type(MediaType.APPLICATION_JSON).build();
             }
         }
 
