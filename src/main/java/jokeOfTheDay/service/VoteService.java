@@ -43,13 +43,6 @@ public class VoteService {
         vote.setJoke(joke);
 
         voteDAO.saveVote(vote);
-
-        //get already inserted votes size to edit count
-        List<Vote> upVoteList = voteDAO.getUpVotesByJoke(joke);
-        int upVotes = upVoteList.size();
-        joke.setUpvotes(upVotes);
-
-        jokeDAO.saveJoke(joke);
     }
 
     public void downVote(Vote vote, SecurityContext securityContext) throws Exception {
@@ -74,12 +67,5 @@ public class VoteService {
         vote.setJoke(joke);
 
         voteDAO.saveVote(vote);
-
-        //get already inserted votes size to edit count
-        List<Vote> downVoteList = voteDAO.getDownVotesByJoke(joke);
-        int downVotes = downVoteList.size();
-        joke.setDownvotes(downVotes);
-
-        jokeDAO.saveJoke(joke);
     }
 }

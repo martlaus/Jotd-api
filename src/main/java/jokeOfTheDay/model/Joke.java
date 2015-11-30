@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jokeOfTheDay.rest.jackson.map.DateTimeDeserializer;
 import jokeOfTheDay.rest.jackson.map.DateTimeSerializer;
+import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
@@ -31,9 +32,11 @@ public class Joke {
     private User user;
 
     @Column
+    @Formula("(SELECT Count(*) FROM Vote AS v WHERE v.joke_id = id AND v.isUpvote = 1)")
     private long upvotes;
 
     @Column
+    @Formula("(SELECT Count(*) FROM Vote AS v WHERE v.joke_id = id AND v.isUpvote = 0)")
     private long downvotes;
 
     public Long getId() {
