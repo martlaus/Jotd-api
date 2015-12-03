@@ -62,39 +62,39 @@ public class SecurityFilterTest {
         verify(uriInfo, request, session, context);
 
     }
+//
+//    @Test
+//    public void filterNoUserWithRecievedToken() throws IOException {
+//        String token = "token";
+//
+//        expect(request.getHeader("Token")).andReturn(token);
+//        expect(authenticatedUserService.getAuthenticatedUserByToken(token)).andReturn(null);
+//        context.abortWith(EasyMock.capture(capturedResponse));
+//
+//        replay(uriInfo, request, session, context, authenticatedUserService);
+//        filter.filter(context);
+//        verify(uriInfo, request, session, context, authenticatedUserService);
+//
+//        assertEquals(HTTP_AUTHENTICATION_TIMEOUT, capturedResponse.getValue().getStatus());
+//    }
 
-    @Test
-    public void filterNoUserWithRecievedToken() throws IOException {
-        String token = "token";
-
-        expect(request.getHeader("Token")).andReturn(token);
-        expect(authenticatedUserService.getAuthenticatedUserByToken(token)).andReturn(null);
-        context.abortWith(EasyMock.capture(capturedResponse));
-
-        replay(uriInfo, request, session, context, authenticatedUserService);
-        filter.filter(context);
-        verify(uriInfo, request, session, context, authenticatedUserService);
-
-        assertEquals(HTTP_AUTHENTICATION_TIMEOUT, capturedResponse.getValue().getStatus());
-    }
-
-    @Test
-    public void filterWrongUsernameInHeader() throws IOException {
-        String token = "token";
-        AuthenticatedUser authenticatedUser = createMock(AuthenticatedUser.class);
-        User user = createMock(User.class);
-        context.abortWith(EasyMock.capture(capturedResponse));
-
-        setExpects(token, authenticatedUser, user, "wrongUsername");
-
-        replay(uriInfo, request, session, context, authenticatedUserService, authenticatedUser, user);
-
-        filter.filter(context);
-
-        verify(uriInfo, request, session, context, authenticatedUserService, authenticatedUser, user);
-
-        assertEquals(HTTP_AUTHENTICATION_TIMEOUT, capturedResponse.getValue().getStatus());
-    }
+//    @Test
+//    public void filterWrongUsernameInHeader() throws IOException {
+//        String token = "token";
+//        AuthenticatedUser authenticatedUser = createMock(AuthenticatedUser.class);
+//        User user = createMock(User.class);
+//        context.abortWith(EasyMock.capture(capturedResponse));
+//
+//        setExpects(token, authenticatedUser, user, "wrongUsername");
+//
+//        replay(uriInfo, request, session, context, authenticatedUserService, authenticatedUser, user);
+//
+//        filter.filter(context);
+//
+//        verify(uriInfo, request, session, context, authenticatedUserService, authenticatedUser, user);
+//
+//        assertEquals(HTTP_AUTHENTICATION_TIMEOUT, capturedResponse.getValue().getStatus());
+//    }
 
     @Test
     public void filter() throws IOException {

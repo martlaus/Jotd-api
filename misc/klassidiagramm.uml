@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="-586.0833333333333" y="1596.3333333333335">jokeOfTheDay.rest.LoginResource</node>
+    <node x="-188.00000000000006" y="2134.3333333333335">jokeOfTheDay.rest.JokeResource</node>
+    <node x="254.0" y="2170.3333333333335">jokeOfTheDay.rest.CommentResource</node>
+    <node x="-109.00000000000006" y="1720.3333333333335">jokeOfTheDay.dao.JokeDAO</node>
+    <node x="-558.0" y="1969.3333333333335">jokeOfTheDay.service.VoteService</node>
+    <node x="-358.0" y="966.3333333333334">jokeOfTheDay.model.AuthenticatedUser</node>
+    <node x="-302.08333333333326" y="1584.3333333333335">jokeOfTheDay.rest.UserResource</node>
+    <node x="72.0" y="1359.3333333333335">jokeOfTheDay.service.AuthenticatedUserService</node>
+    <node x="865.0" y="1263.3333333333335">jokeOfTheDay.model.Comment</node>
+    <node x="246.0" y="1981.3333333333335">jokeOfTheDay.service.CommentService</node>
+    <node x="-620.0" y="1708.3333333333335">jokeOfTheDay.dao.VoteDAO</node>
+    <node x="-101.0" y="1002.3333333333334">jokeOfTheDay.dao.AuthenticatedUserDAO</node>
+    <node x="-620.0" y="990.3333333333334">jokeOfTheDay.dao.UserDAO</node>
+    <node x="-389.9107142857142" y="1335.3333333333335">jokeOfTheDay.service.UserService</node>
+    <node x="681.5" y="894.3333333333334">jokeOfTheDay.model.Joke</node>
+    <node x="568.0" y="1287.3333333333335">jokeOfTheDay.model.Vote</node>
+    <node x="577.125" y="573.3333333333334">jokeOfTheDay.model.User</node>
+    <node x="129.0" y="1584.3333333333335">jokeOfTheDay.rest.LogoutResource</node>
+    <node x="-128.00000000000006" y="1933.3333333333335">jokeOfTheDay.service.JokeService</node>
+    <node x="410.0" y="1756.3333333333335">jokeOfTheDay.dao.CommentDAO</node>
+    <node x="-590.0" y="2158.3333333333335">jokeOfTheDay.rest.VoteResource</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="jokeOfTheDay.service.CommentService" target="jokeOfTheDay.dao.JokeDAO">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="jokeOfTheDay.service.VoteService" target="jokeOfTheDay.dao.VoteDAO">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="jokeOfTheDay.model.Comment" target="jokeOfTheDay.model.User">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="jokeOfTheDay.model.Joke" target="jokeOfTheDay.model.User">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="jokeOfTheDay.rest.LogoutResource" target="jokeOfTheDay.service.AuthenticatedUserService">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="jokeOfTheDay.rest.UserResource" target="jokeOfTheDay.service.UserService">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="jokeOfTheDay.service.AuthenticatedUserService" target="jokeOfTheDay.dao.AuthenticatedUserDAO">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="jokeOfTheDay.rest.CommentResource" target="jokeOfTheDay.service.CommentService">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="jokeOfTheDay.model.Comment" target="jokeOfTheDay.model.Joke">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="jokeOfTheDay.service.CommentService" target="jokeOfTheDay.dao.CommentDAO">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="jokeOfTheDay.rest.VoteResource" target="jokeOfTheDay.service.VoteService">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="jokeOfTheDay.model.Vote" target="jokeOfTheDay.model.User">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="jokeOfTheDay.rest.JokeResource" target="jokeOfTheDay.service.JokeService">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="jokeOfTheDay.service.VoteService" target="jokeOfTheDay.dao.JokeDAO">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="jokeOfTheDay.service.UserService" target="jokeOfTheDay.dao.AuthenticatedUserDAO">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="jokeOfTheDay.service.UserService" target="jokeOfTheDay.model.AuthenticatedUser">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="jokeOfTheDay.rest.LoginResource" target="jokeOfTheDay.service.UserService">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="jokeOfTheDay.model.AuthenticatedUser" target="jokeOfTheDay.model.User">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="jokeOfTheDay.model.Vote" target="jokeOfTheDay.model.Joke">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="jokeOfTheDay.service.UserService" target="jokeOfTheDay.dao.UserDAO">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="jokeOfTheDay.service.JokeService" target="jokeOfTheDay.dao.JokeDAO">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.6000000000000001" x="-139.66666666666674" y="1454.5" />
+  <SelectedNodes>
+    <node>jokeOfTheDay.rest.LoginResource</node>
+    <node>jokeOfTheDay.rest.JokeResource</node>
+    <node>jokeOfTheDay.rest.CommentResource</node>
+    <node>jokeOfTheDay.dao.JokeDAO</node>
+    <node>jokeOfTheDay.service.VoteService</node>
+    <node>jokeOfTheDay.model.AuthenticatedUser</node>
+    <node>jokeOfTheDay.rest.UserResource</node>
+    <node>jokeOfTheDay.service.AuthenticatedUserService</node>
+    <node>jokeOfTheDay.model.Comment</node>
+    <node>jokeOfTheDay.service.CommentService</node>
+    <node>jokeOfTheDay.dao.VoteDAO</node>
+    <node>jokeOfTheDay.dao.AuthenticatedUserDAO</node>
+    <node>jokeOfTheDay.dao.UserDAO</node>
+    <node>jokeOfTheDay.service.UserService</node>
+    <node>jokeOfTheDay.model.Joke</node>
+    <node>jokeOfTheDay.model.Vote</node>
+    <node>jokeOfTheDay.model.User</node>
+    <node>jokeOfTheDay.rest.LogoutResource</node>
+    <node>jokeOfTheDay.service.JokeService</node>
+    <node>jokeOfTheDay.dao.CommentDAO</node>
+    <node>jokeOfTheDay.rest.VoteResource</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Inner Classes</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

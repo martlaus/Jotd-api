@@ -51,8 +51,6 @@ public class VoteServiceTest {
         expect(jotdPrincipal.getUser()).andReturn(user).anyTimes();
         expect(jokeDAO.getJokeById(1L)).andReturn(joke);
         expect(voteDAO.saveVote(vote)).andReturn(vote);
-        expect(voteDAO.getUpVotesByJoke(joke)).andReturn(votes);
-        expect(jokeDAO.saveJoke(joke)).andReturn(joke);
         expect(voteDAO.getVotesByJokeAndUser(joke, user)).andReturn(new ArrayList<>());
 
         replay(voteDAO, jokeDAO, securityContext, jotdPrincipal);
@@ -77,8 +75,6 @@ public class VoteServiceTest {
         expect(jotdPrincipal.getUser()).andReturn(user).anyTimes();
         expect(jokeDAO.getJokeById(1L)).andReturn(joke);
         expect(voteDAO.saveVote(vote)).andReturn(vote);
-        expect(voteDAO.getUpVotesByJoke(joke)).andReturn(votes);
-        expect(jokeDAO.saveJoke(joke)).andReturn(joke);
         expect(voteDAO.getVotesByJokeAndUser(joke, user)).andReturn(new ArrayList<>());
 
         replay(voteDAO, jokeDAO, securityContext, jotdPrincipal);

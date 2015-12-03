@@ -8,6 +8,8 @@ DROP TABLE IF EXISTS User;
 DROP TABLE IF EXISTS Joke;
 DROP TABLE IF EXISTS AuthenticatedUser;
 DROP TABLE IF EXISTS Vote;
+DROP TABLE IF EXISTS Comment;
+
 
 SET foreign_key_checks = 1;
 
@@ -62,5 +64,22 @@ CREATE TABLE Vote (
   UNIQUE KEY (user_id, joke_id, id)
 
 );
+
+CREATE TABLE Comment (
+  id      BIGINT AUTO_INCREMENT PRIMARY KEY ,
+  added   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  comment TEXT NOT NULL,
+  joke_id    BIGINT NOT NULL,
+  user    BIGINT NOT NULL,
+
+  FOREIGN KEY (user)
+  REFERENCES User (id)
+    ON DELETE CASCADE,
+
+  FOREIGN KEY (joke_id)
+  REFERENCES Joke (id)
+    ON DELETE CASCADE
+);
+
 
 

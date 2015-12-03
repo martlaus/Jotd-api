@@ -9,6 +9,9 @@ import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
+import java.util.List;
+
+import static javax.persistence.FetchType.EAGER;
 
 /**
  * Created by mart on 28.09.15.
@@ -38,6 +41,9 @@ public class Joke {
     @Column
     @Formula("(SELECT Count(*) FROM Vote AS v WHERE v.joke_id = id AND v.isUpvote = 0)")
     private long downvotes;
+
+    @OneToMany(fetch = EAGER, mappedBy = "joke")
+    private List<Comment> comments;
 
     public Long getId() {
         return id;
@@ -88,4 +94,10 @@ public class Joke {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+
 }
