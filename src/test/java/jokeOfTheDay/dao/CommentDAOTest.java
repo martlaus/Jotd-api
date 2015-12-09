@@ -42,5 +42,6 @@ public class CommentDAOTest extends DatabaseTestBase{
         List<Comment> comments = commentDAO.getCommentByJokeId(1);
         assertNotNull(comments);
         assertEquals(2, comments.size());
+        
     }
 }
