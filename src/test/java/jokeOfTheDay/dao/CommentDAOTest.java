@@ -20,7 +20,14 @@ public class CommentDAOTest extends DatabaseTestBase{
 
     @Test
     public void saveComment(){
+        Comment comment = new Comment();
+        comment.setComment("test");
+        Comment returnedComment = commentDAO.saveComment(comment);
 
+        assertNotNull(returnedComment);
+        assertNotNull(returnedComment.getId());
+
+        commentDAO.remove(returnedComment);
     }
 
     @Test

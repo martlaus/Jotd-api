@@ -48,4 +48,9 @@ public class CommentDAO {
 
         return comments;
     }
+
+    public void remove(Comment comment) {
+        entityManager.remove(comment);
+    }
+
 }
